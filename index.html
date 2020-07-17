@@ -10,8 +10,9 @@
     <div class="container" id="app">
 
         <div class="row mt-5">
-            <div class="col-12 border-bottom mb-5">
+            <div class="col-12 border-bottom mb-5 d-flex justify-content-between align-items-center">
                 <h2>{{ name }}</h2>
+                <p>{{ contactsCount }}</p>
             </div>
 
             <div class="col-4">
@@ -77,9 +78,14 @@
                     email: '',
                     phone: ''
                 },
-                isEdit: false                
+                isEdit: false               
             },
-            created(){
+            computed: {
+                contactsCount(){
+                    return `Total de contatos é ${this.contacts.length}`;
+                }
+            },
+            created() {
                 this.contacts = JSON.parse(localStorage.getItem('contactsApp'));
             },
             methods: {
@@ -105,7 +111,7 @@
 
                         location.reload();
                     },
-                    removeContact(contactId){
+                    removeContact(contactId) {
                         let contacts = localStorage.getItem('contactsApp');
 
                         if(!contacts) return;
@@ -120,11 +126,11 @@
 
                         localStorage.setItem('contactsApp', JSON.stringify(contacts));                        
                     },
-                    editContact(contact){
+                    editContact(contact) {
                         this.contact = contact;
                         this.isEdit = true;
                     },
-                    updateContact(contact){
+                    updateContact(contact) {
                        let contacts = this.contacts.map(contactMap => {
                             
                             if(contactMap.id == contact.id){
