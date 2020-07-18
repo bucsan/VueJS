@@ -16,7 +16,11 @@
             </div>
 
             <div class="col-4">
-
+                
+                <div v-if="isEdit">Editando contato</div>  
+                <div v-else-if="!isEdit">Cadastrando contato</div>              
+                <div v-else>Cadastrando contato Default</div>
+                
                 <form action="">
 
                     <div class="form-group mr-1">
@@ -44,7 +48,7 @@
 
             <div class="col-8 border-left">
                 
-                <div class="contact">
+                <div class="contact" v-if="contacts.length">
                         
                     <div class="col-12 mb-2" v-for="contact in contacts">
 
@@ -61,6 +65,7 @@
                         </div>
                     </div>
                 </div>
+                <div v-else>Nenhum contato encontrado!</div>
             </div>
         </div>
     </div>
